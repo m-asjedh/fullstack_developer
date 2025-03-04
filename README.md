@@ -28,7 +28,7 @@ This assessment evaluates your skills in front-end and back-end development, dat
 ---
 
 ## ⏳ Deadline  
-- Complete the task and submit your GitHub repository link by **[Specify Deadline]**.  
+- Complete the task and submit your GitHub repository link by **08/03/2025**.  
 
 ## ⚡ Bonus (Optional)  
 - Implement authentication (JWT or OAuth).  
