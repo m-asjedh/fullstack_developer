@@ -1,27 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 
-export default function Modal({
-  isOpen,
-  onClose,
-  onSubmit,
-  initialMessage = "",
-}) {
-  const [message, setMessage] = useState(initialMessage);
+export default function Modal({ isOpen, onClose, onSubmit, initialData }) {
+  const [messageContent, setMessageContent] = useState(initialData || "");
 
   useEffect(() => {
-    setMessage(initialMessage);
-  }, [initialMessage]);
+    if (isOpen) {
+      setMessageContent(initialData || "");
+    }
+  }, [isOpen, initialData]);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    onSubmit(message);
-    setMessage("");
-    onClose();
-  };
-
-  if (!isOpen) return null;
-
-  return (
+  return isOpen ? (
     <div
       className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50"
       onClick={onClose}
@@ -32,16 +20,22 @@ export default function Modal({
       >
         <div className="mb-4">
           <h3 className="text-xl font-semibold text-gray-800">
-            {initialMessage ? "Edit Message" : "Add New Message"}
+            {initialData ? "Edit Message" : "Add New Message"}
           </h3>
           <p className="text-gray-600">
-            {initialMessage
+            {initialData
               ? "Make changes to your message here."
               : "Enter a new message here."}
           </p>
         </div>
 
-        <form onSubmit={handleSubmit}>
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            console.log("Submitting message:", messageContent);
+            onSubmit(messageContent);
+          }}
+        >
           <div className="grid gap-4 py-4">
             <div className="grid grid-cols-4 items-center gap-4">
               <label htmlFor="message" className="text-right text-gray-700">
@@ -50,8 +44,8 @@ export default function Modal({
               <input
                 id="message"
                 type="text"
-                value={message}
-                onChange={(e) => setMessage(e.target.value)}
+                value={messageContent}
+                onChange={(e) => setMessageContent(e.target.value)}
                 className="col-span-3 p-2 border border-gray-300 rounded-md"
               />
             </div>
@@ -69,11 +63,11 @@ export default function Modal({
               type="submit"
               className="px-4 py-2 bg-teal-500 text-white rounded-md hover:bg-teal-600"
             >
-              {initialMessage ? "Save Changes" : "Add Message"}
+              {initialData ? "Save Changes" : "Add Message"}
             </button>
           </div>
         </form>
       </div>
     </div>
-  );
+  ) : null;
 }
