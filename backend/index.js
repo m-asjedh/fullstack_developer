@@ -10,7 +10,7 @@ dotenv.config();
 const app = express();
 app.use(
   cors({
-    origin: "https://fullstack-developer-frontend.vercel.app/",
+    origin: "https://fullstack-developer-frontend.vercel.app",
   })
 );
 app.use(express.json());
