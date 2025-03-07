@@ -39,7 +39,7 @@ export default function Home() {
   const handleAddMessage = async (messageContent) => {
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/messages",
+        "https://fullstack-developer-gules.vercel.app/api/messages",
         { content: messageContent },
         {
           headers: {
@@ -62,7 +62,7 @@ export default function Home() {
   const handleUpdateMessage = async (id, updatedMessage) => {
     try {
       await axios.put(
-        `http://localhost:5000/api/messages/${id}`,
+        `https://fullstack-developer-gules.vercel.app/api/messages/${id}`,
         { content: updatedMessage },
         {
           headers: {
@@ -79,11 +79,14 @@ export default function Home() {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/api/messages/${id}`, {
-        headers: {
-          Authorization: `Bearer ${getAuthToken()}`,
-        },
-      });
+      await axios.delete(
+        `https://fullstack-developer-gules.vercel.app/api/messages/${id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${getAuthToken()}`,
+          },
+        }
+      );
       console.log(`Message deleted with id: ${id}`);
       fetchMessages();
     } catch (error) {
