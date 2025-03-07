@@ -15,14 +15,11 @@ export default function Home() {
 
   const fetchMessages = async () => {
     try {
-      const response = await axios.get(
-        "https://fullstack-developer-gules.vercel.app/api/messages",
-        {
-          headers: {
-            Authorization: `Bearer ${getAuthToken()}`,
-          },
-        }
-      );
+      const response = await axios.get("http://localhost:5000/api/messages", {
+        headers: {
+          Authorization: `Bearer ${getAuthToken()}`,
+        },
+      });
 
       if (Array.isArray(response.data.data)) {
         setMessages(response.data.data);
@@ -39,7 +36,7 @@ export default function Home() {
   const handleAddMessage = async (messageContent) => {
     try {
       const response = await axios.post(
-        "https://fullstack-developer-gules.vercel.app/api/messages",
+        "http://localhost:5000/api/messages",
         { content: messageContent },
         {
           headers: {
@@ -62,7 +59,7 @@ export default function Home() {
   const handleUpdateMessage = async (id, updatedMessage) => {
     try {
       await axios.put(
-        `https://fullstack-developer-gules.vercel.app/api/messages/${id}`,
+        `http://localhost:5000/api/messages/${id}`,
         { content: updatedMessage },
         {
           headers: {
@@ -79,14 +76,11 @@ export default function Home() {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(
-        `https://fullstack-developer-gules.vercel.app/api/messages/${id}`,
-        {
-          headers: {
-            Authorization: `Bearer ${getAuthToken()}`,
-          },
-        }
-      );
+      await axios.delete(`http://localhost:5000/api/messages/${id}`, {
+        headers: {
+          Authorization: `Bearer ${getAuthToken()}`,
+        },
+      });
       console.log(`Message deleted with id: ${id}`);
       fetchMessages();
     } catch (error) {

@@ -8,11 +8,7 @@ import messageRoutes from "./routes/messageRoutes.js";
 dotenv.config();
 
 const app = express();
-app.use(
-  cors({
-    origin: "https://fullstack-developer-frontend.vercel.app",
-  })
-);
+app.use(cors());
 app.use(express.json());
 app.use(cookieParser());
 

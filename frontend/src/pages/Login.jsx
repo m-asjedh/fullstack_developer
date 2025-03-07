@@ -17,7 +17,7 @@ export default function Login() {
   const handleLogin = async (values) => {
     try {
       const response = await axios.post(
-        "https://fullstack-developer-gules.vercel.app/api/users/login",
+        "http://localhost:5000/api/users/login",
         {
           email: values.email,
           password: values.password,
@@ -33,7 +33,7 @@ export default function Login() {
       }, 2000);
     } catch (error) {
       console.error("Login error:", error);
-      alert(error.response?.data?.message || "Login failed. Please try again.");
+      toast.warn("Cannot Log in");
     }
   };
 
