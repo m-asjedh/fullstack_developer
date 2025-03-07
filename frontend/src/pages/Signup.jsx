@@ -22,7 +22,7 @@ export default function Signup() {
   const handleRegister = async (values) => {
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/users/register",
+        "https://fullstack-developer-gules.vercel.app/api/users/register",
         {
           name: values.name,
           email: values.email,

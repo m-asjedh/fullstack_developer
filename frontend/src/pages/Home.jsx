@@ -15,11 +15,14 @@ export default function Home() {
 
   const fetchMessages = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/api/messages", {
-        headers: {
-          Authorization: `Bearer ${getAuthToken()}`,
-        },
-      });
+      const response = await axios.get(
+        "https://fullstack-developer-gules.vercel.app/api/messages",
+        {
+          headers: {
+            Authorization: `Bearer ${getAuthToken()}`,
+          },
+        }
+      );
 
       if (Array.isArray(response.data.data)) {
         setMessages(response.data.data);
